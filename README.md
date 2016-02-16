@@ -1,5 +1,7 @@
 # Mine_Clearer
 
+![screenshot](https://github.com/jsheradin/Mine_Clearer/blob/master/GameOver.PNG)
+
 ### About
 This is a basic minesweeper game implemented in Processing.
 
