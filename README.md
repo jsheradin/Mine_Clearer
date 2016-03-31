@@ -10,4 +10,4 @@ This is a basic minesweeper game implemented in Processing.
 - Mine counter & flag counter
 
 ### Additional Info
-Runs in Processing 2.4.1
+Runs in Processing 2.2.1

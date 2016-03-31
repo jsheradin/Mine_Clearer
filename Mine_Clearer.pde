@@ -105,7 +105,7 @@ void mouseClicked() {
       if (nums[y][x] == 0) {
         clearX.append(x);
         clearY.append(y);
-        thread("autoclear"); //initiate auto clear thread
+        autoclear(); //initiate auto clear
       }
     }
     if (blocks[y][x] == 1 || blocks[y][x] == 3) { //Bomb, unclicked or bomb, flagged
@@ -130,7 +130,7 @@ void mouseClicked() {
   } else {
     drawGrid();
   }
-  
+
   //println(clearY.size());
 }
 
@@ -184,9 +184,9 @@ void drawGrid() {
 
 //Automatically clear out blocks that are around clear blocks
 void autoclear() {
-  while (clearY.size() != 0) {
+  while (clearY.size () != 0) {
     //print("loop");
-    
+
     //Scan surrounding blocks and add to clear list
     int i = clearY.get(0);
     int j = clearX.get(0);
@@ -234,40 +234,40 @@ void autoclear() {
 
     //Set block to clear
     blocks[i][j] = 4;
-    
+
     //Clear surrounding blocks
     if (i>0) {
-        blocks[i-1][j] = 4;
-      }
-      //Bottom
-      if (i<blocksTall-1) {
-        blocks[i+1][j] = 4;
-      }
-      //Left
-      if (j>0) {
-        blocks[i][j-1] = 4;
-      }
-      //Right
-      if (j<blocksWide-1) {
-        blocks[i][j+1] = 4;
-      }
-      //Top right
-      if (i>0 && j<blocksWide-1) {
-        blocks[i-1][j+1] = 4;
-      }
-      //Top Left
-      if (j>0 && i>0) {
-        blocks[i-1][j-1] = 4;
-      }
-      //Bottom Left
-      if (j>0 && i<blocksTall-1) {
-        blocks[i+1][j-1] = 4;
-      }
-      //Bottom Right
-      if (i<blocksTall-1 && j<blocksWide-1) {
-        blocks[i+1][j+1] = 4;
-      }
-    
+      blocks[i-1][j] = 4;
+    }
+    //Bottom
+    if (i<blocksTall-1) {
+      blocks[i+1][j] = 4;
+    }
+    //Left
+    if (j>0) {
+      blocks[i][j-1] = 4;
+    }
+    //Right
+    if (j<blocksWide-1) {
+      blocks[i][j+1] = 4;
+    }
+    //Top right
+    if (i>0 && j<blocksWide-1) {
+      blocks[i-1][j+1] = 4;
+    }
+    //Top Left
+    if (j>0 && i>0) {
+      blocks[i-1][j-1] = 4;
+    }
+    //Bottom Left
+    if (j>0 && i<blocksTall-1) {
+      blocks[i+1][j-1] = 4;
+    }
+    //Bottom Right
+    if (i<blocksTall-1 && j<blocksWide-1) {
+      blocks[i+1][j+1] = 4;
+    }
+
     //Remove from list
     clearX.remove(0);
     clearY.remove(0);
