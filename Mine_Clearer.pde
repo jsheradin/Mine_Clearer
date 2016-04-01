@@ -99,7 +99,6 @@ void mouseClicked() {
   if (mouseButton == LEFT) { //Normal click
     if (blocks[y][x] == 0 || blocks[y][x] == 2) { //Safe, unclicked or safe, flagged
       blocks[y][x] = 4; //Cleared
-      found++;
 
       //Add to auto clear if 0
       if (nums[y][x] == 0) {
@@ -123,9 +122,20 @@ void mouseClicked() {
     }
   }
   //println(x + ", " + y);
+  
+  //Check if game is won
+  found = 0;
+  for (int i=0; i<blocksTall; i++) {
+    for (int j=0; j<blocksWide; j++) {
+      if (blocks[i][j] == 4) {
+        found++;
+      }
+    }
+  }
+  
   if (gameOver) {
     gameOverScreen();
-  } else if (found == blocksWide * blocksTall - bombs) {
+  } else if (found == (blocksWide * blocksTall) - bombs) {
     gameWinScreen();
   } else {
     drawGrid();
