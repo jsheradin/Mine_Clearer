@@ -1,7 +1,7 @@
 //Difficulty Settings
 int blocksWide = 30; //Width in blocks
 int blocksTall = 30; //Height in blocks
-float difficulty = .625; //Bomb spawning probability (sort of)
+int difficulty = 150; //Number of bombs
 
 //Appearance Settings
 int pixPerBlock = 20; //Block size in pixels
@@ -32,13 +32,13 @@ void setup() {
   state[3] = #FF5050; //Bomb, flagged
   state[4] = #80FF80; //Cleared
 
-  //Place bombs (somewhat random, could be done much better)
-  for (int i=0; i<blocksTall; i++) {
-    for (int j=0; j<blocksWide; j++) {
-      if (random(0, difficulty) > 0.5) {
-        blocks[i][j] = 1;
-        bombs++;
-      }
+  //Place bombs
+  while (bombs < difficulty) {
+    int x = int(random(0, blocksWide));
+    int y = int(random(0, blocksTall));
+    if (blocks[y][x] != 1) {
+      blocks[y][x] = 1;
+      bombs++;
     }
   }
 
@@ -83,9 +83,9 @@ void setup() {
   }
 
   //Window Setup
-  println("Done");
   size(pixPerBlock * blocksWide, pixPerBlock * blocksTall);
   background(state[0]);
+  println("Ready");
   drawGrid();
 }
 
@@ -122,7 +122,7 @@ void mouseClicked() {
     }
   }
   //println(x + ", " + y);
-  
+
   //Check if game is won
   found = 0;
   for (int i=0; i<blocksTall; i++) {
@@ -132,7 +132,7 @@ void mouseClicked() {
       }
     }
   }
-  
+
   if (gameOver) {
     gameOverScreen();
   } else if (found == (blocksWide * blocksTall) - bombs) {
@@ -286,5 +286,5 @@ void autoclear() {
 
 //This loop needs to be here just so the program doesn't terminate after setup
 void draw() {
-}
 
+}
